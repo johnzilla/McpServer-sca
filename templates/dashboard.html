@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card bg-dark border-light">
+            <div class="card-header">
+                <h5 class="card-title">Test Code Analysis</h5>
+            </div>
+            <div class="card-body">
+                <form id="analyzeForm" class="mb-3">
+                    <div class="form-group">
+                        <label for="codeInput">Enter Python Code to Analyze:</label>
+                        <textarea class="form-control bg-dark text-light" id="codeInput" rows="5">import requests
+import json
+
+def fetch_data():
+    response = requests.get('https://api.example.com/data')
+    return json.loads(response.text)</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Analyze Code</button>
+                    <span id="analysisTime" class="ms-3 text-light"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card bg-dark border-light">
+            <div class="card-header">
+                <h5 class="card-title">Active Sessions</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="sessionsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-dark border-light">
+            <div class="card-header">
+                <h5 class="card-title">Recent Analyses</h5>
+            </div>
+            <div class="card-body">
+                <div id="recentAnalyses">
+                    <!-- Populated via WebSocket -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card bg-dark border-light">
+            <div class="card-header">
+                <h5 class="card-title">Analysis Results</h5>
+            </div>
+            <div class="card-body">
+                <pre id="analysisResults" class="text-light">Waiting for analysis results...</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

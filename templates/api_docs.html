@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>API Documentation</h1>
+    
+    <div class="card bg-dark border-light mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">Code Analysis Endpoint</h2>
+        </div>
+        <div class="card-body">
+            <h3 class="h6">POST /v1/sca/analyze</h3>
+            
+            <h4 class="mt-4">Request Format</h4>
+            <pre class="bg-dark text-light p-3"><code>{
+  "code": "string",
+  "session_id": "string (optional)",
+  "file_path": "string (optional)"
+}</code></pre>
+
+            <h4 class="mt-4">Response Format</h4>
+            <pre class="bg-dark text-light p-3"><code>{
+  "status": "success",
+  "output": {
+    "schema_version": "mcp-0.1",
+    "timestamp": "ISO-8601 timestamp",
+    "analysis_type": "security_composition",
+    "status": "success",
+    "results": [
+      {
+        "type": "vulnerability",
+        "severity": "low|medium|high",
+        "package": {
+          "name": "string",
+          "version": "string"
+        },
+        "identifier": "CVE-ID",
+        "description": "string",
+        "recommendation": "string",
+        "metadata": {
+          "cve": "string",
+          "discovered_at": "ISO-8601 timestamp"
+        }
+      }
+    ]
+  }
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="card bg-dark border-light">
+        <div class="card-header">
+            <h2 class="h5 mb-0">Try It Out</h2>
+        </div>
+        <div class="card-body">
+            <div id="apiTest">
+                <div class="mb-3">
+                    <label for="codeInput" class="form-label">Code to Analyze:</label>
+                    <textarea class="form-control bg-dark text-light" id="codeInput" rows="5">import requests
+import json
+
+def fetch_data():
+    response = requests.get('https://api.example.com/data')
+    return json.loads(response.text)</textarea>
+                </div>
+                <button class="btn btn-primary" onclick="testAPI()">Test API</button>
+                <div class="mt-3">
+                    <h4 class="h6">Response:</h4>
+                    <pre id="apiResponse" class="bg-dark text-light p-3">Click "Test API" to see results</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function testAPI() {
+    const code = document.getElementById('codeInput').value;
+    const response = document.getElementById('apiResponse');
+    
+    response.textContent = 'Loading...';
+    
+    fetch('/v1/sca/analyze', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            code: code,
+            session_id: 'docs_test_' + Date.now()
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        response.textContent = JSON.stringify(data, null, 2);
+    })
+    .catch(err => {
+        response.textContent = 'Error: ' + err.message;
+    });
+}
+</script>
+{% endblock %}

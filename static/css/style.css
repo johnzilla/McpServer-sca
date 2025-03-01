@@ -1,0 +1,41 @@
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.card {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #353535;
+    border-bottom: 1px solid #404040;
+}
+
+pre {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.navbar {
+    border-bottom: 1px solid #404040;
+}
+
+#analysisResults {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.analysis-item {
+    padding: 10px;
+    border-bottom: 1px solid #404040;
+}
+
+.analysis-item:last-child {
+    border-bottom: none;
+}

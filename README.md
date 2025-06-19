@@ -106,3 +106,7 @@ The service will be available on port 5000 by default.
 - The API endpoint is public and does not require authentication
 - The admin dashboard should be protected in production
 - Rate limiting may be applied based on usage patterns
+
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).
